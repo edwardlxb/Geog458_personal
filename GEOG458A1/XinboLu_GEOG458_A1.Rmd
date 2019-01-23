@@ -11,7 +11,7 @@ output: html_document
 ###3 different header size
 
 ## Task 2
-This is *edwardlxb*’s first assignment for **Geog458**. Our course page can be accessed [here](https://canvas.uw.edu/courses/1269928).
+This is *edwardlxb* 's first assignment for **Geog458**. Our course page can be accessed [here](https://canvas.uw.edu/courses/1269928).
 
 ##Task 3
 ![Check UW's Logo](https://s3-us-west-2.amazonaws.com/uw-s3-cdn/wp-content/uploads/sites/98/2014/09/07214435/Signature_Stacked_Purple_Hex.png)    ****
@@ -28,23 +28,57 @@ This this is how to load data into R and how to convert it
 
 ## Task 12 & 13
 ```{r echo = TRUE}
-
+##Calling library tidyverse
 library(tidyverse)
-object1=read_csv("China_EO_49to17.csv")
 
+##Read external csv file
+object1=read.csv("China_EO_49to17.csv")
+
+##Convert to a tibble object
 object2=as_tibble(object1)
 
+##Show information about the object
 head(object2)
 ```
 
 
 ## Task 14 
 ```{r echo = TRUE}
-arrange(object2, desc(Year))
+library(dplyr)
 
+##arrange data ny year
+ByYear<- arrange(object2, desc(Year))
+View(ByYear)
+##creating a new tibble object 
+NewTibble<- as_tibble(object1)
 
+## Only using the column name way and then filter year after 2000
+YearAfter2000_normal<- NewTibble[c("Year", "Beijing_Enterprise", "Beijing_Output", "Shanghai_Enterprise", "Shanghai_Output")]
+YearAfter2000_normal <- filter(YearAfter2000_normal, YearAfter2000_normal$Year > 2000)
+View(YearAfter2000_normal)
 
+##Using dplyr to select column and rows with condition
+YearAfter2000_dyplr <- NewTibble %>%
+  select(Year, Beijing_Enterprise, Beijing_Output, Shanghai_Enterprise, Shanghai_Output) %>%
+  filter(Year >= 2000)
+view(YearAfter2000_dyplr)
 
+##Mutate a new ratio column 
+NewRatioColumn <- YearAfter2000_dyplr %>%
+  mutate(Ratio = Beijing_Output/Shanghai_Output)
+view(NewRatioColumn)
+```
 
+##Task 15
+```{r, echo=TRUE}
+##Creating the function that takes in the required dataset, the name of two province output name
 
+myFunction<- function(dataset, province1_output, province2_output){
+  province_outputs <- dataset %>%
+    select(province1_output, province2_output, Year)
+return(province_outputs)
+}
+
+##example using Beijing_Output and Shanghai_Output
+datasets<- myFunction(NewTibble, province1_output = "Beijing_Output", province2_output = "Shanghai_Output")
 ```

@@ -204,7 +204,7 @@ $(document).ready(function () {
 </div>
 <div id="task-2" class="section level2">
 <h2>Task 2</h2>
-<p>This is <em>edwardlxb</em>’s first assignment for <strong>Geog458</strong>. Our course page can be accessed <a href="https://canvas.uw.edu/courses/1269928">here</a>.</p>
+<p>This is <em>edwardlxb</em> ’s first assignment for <strong>Geog458</strong>. Our course page can be accessed <a href="https://canvas.uw.edu/courses/1269928">here</a>.</p>
 </div>
 <div id="task-3" class="section level2">
 <h2>Task 3</h2>
@@ -214,9 +214,103 @@ $(document).ready(function () {
 <h2>Task 4</h2>
 <p>this is the Pythagorean theorem: <span class="math display">\[a^2 + b^2 = c^2\]</span></p>
 </div>
-<div id="loading-the-data" class="section level2">
-<h2>Loading the Data</h2>
+<div id="task-11-loading-the-data" class="section level2">
+<h2>Task 11: Loading the Data</h2>
 <p>This this is how to load data into R and how to convert it</p>
+</div>
+<div id="task-12-13" class="section level2">
+<h2>Task 12 &amp; 13</h2>
+<pre class="r"><code>##Calling library tidyverse
+library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------------------------------------------------ tidyverse 1.2.1 --</code></pre>
+<pre><code>## v ggplot2 3.1.0     v purrr   0.2.5
+## v tibble  2.0.1     v dplyr   0.7.8
+## v tidyr   0.8.2     v stringr 1.3.1
+## v readr   1.3.1     v forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts --------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>##Read external csv file
+object1=read.csv(&quot;China_EO_49to17.csv&quot;)
+
+##Convert to a tibble object
+object2=as_tibble(object1)
+
+##Show information about the object
+head(object2)</code></pre>
+<pre><code>## # A tibble: 6 x 63
+##    Year Beijing_Enterpr~ Beijing_Output Tianjin_Enterpr~ Tianjin_Output
+##   &lt;int&gt;            &lt;int&gt;          &lt;dbl&gt;            &lt;int&gt;          &lt;dbl&gt;
+## 1  1949            21055           1.47             4708           7.29
+## 2  1950            23461           3.07             6358          11.6 
+## 3  1951            29839           5.99             9190          17.3 
+## 4  1952            34386           7.19               82          18.5 
+## 5  1953            38632          10.3              8459          26.2 
+## 6  1954            39595          11.9              8918          29.4 
+## # ... with 58 more variables: Hebei_Enterprise &lt;int&gt;, Hebei_Output &lt;dbl&gt;,
+## #   Shanxi_Enterprise &lt;int&gt;, Shanxi_Output &lt;dbl&gt;,
+## #   InnerMongolia_Enterprise &lt;int&gt;, InnerMongolia_Output &lt;dbl&gt;,
+## #   Liaoning_Enterprise &lt;int&gt;, Liaoning_Output &lt;dbl&gt;,
+## #   Jilin_Enterprise &lt;int&gt;, Jilin_Output &lt;dbl&gt;,
+## #   Heilongjiang_Enterprise &lt;int&gt;, Heilongjiang_Output &lt;dbl&gt;,
+## #   Shanghai_Enterprise &lt;int&gt;, Shanghai_Output &lt;dbl&gt;,
+## #   Jiangsu_Enterprise &lt;int&gt;, Jiangsu_Output &lt;dbl&gt;,
+## #   Zhejiang_Enterprise &lt;int&gt;, Zhejiang_Output &lt;dbl&gt;,
+## #   Anhui_Enterprise &lt;int&gt;, Anhui_Output &lt;dbl&gt;, Fujian_Enterprise &lt;int&gt;,
+## #   Fujian_Output &lt;dbl&gt;, Jiangxi_Enterprise &lt;int&gt;, Jiangxi_Output &lt;dbl&gt;,
+## #   Shandong_Enterprise &lt;int&gt;, Shandong_Output &lt;dbl&gt;,
+## #   Henan_Enterprise &lt;int&gt;, Henan_Output &lt;dbl&gt;, Hubei_Enterprise &lt;int&gt;,
+## #   Hubei_Output &lt;dbl&gt;, Hunan_Enterprises &lt;int&gt;, Hunan_Output &lt;dbl&gt;,
+## #   Guangdong_Enterprise &lt;int&gt;, Guangdong_Output &lt;dbl&gt;,
+## #   Guangxi_Enterprise &lt;int&gt;, Guangxi_Output &lt;dbl&gt;,
+## #   Hainan_Enterprise &lt;int&gt;, Hainan_Output &lt;dbl&gt;,
+## #   Chongqing_Enterprise &lt;int&gt;, Chongqing_Output &lt;dbl&gt;,
+## #   Sichuan_Enterprise &lt;int&gt;, Sichuan_Output &lt;dbl&gt;,
+## #   Guizhou_Enterprise &lt;int&gt;, Guizhou_Output &lt;dbl&gt;,
+## #   Yunnan_Enterprise &lt;int&gt;, Yunnan_Output &lt;dbl&gt;, Tibet_Enterprise &lt;int&gt;,
+## #   Tibet_Output &lt;dbl&gt;, Shaanxi_Enterprise &lt;int&gt;, Shaanxi_Output &lt;dbl&gt;,
+## #   Gansu_Enterprise &lt;int&gt;, Gansu_Output &lt;dbl&gt;, Qinghai_Enterprise &lt;int&gt;,
+## #   Qinghai_Output &lt;dbl&gt;, Ningxia_Enterprise &lt;int&gt;, Ningxia_Output &lt;dbl&gt;,
+## #   Xinjiang_Enterprise &lt;int&gt;, Xinjiang_Output &lt;dbl&gt;</code></pre>
+</div>
+<div id="task-14" class="section level2">
+<h2>Task 14</h2>
+<pre class="r"><code>library(dplyr)
+
+##arrange data ny year
+ByYear&lt;- arrange(object2, desc(Year))
+View(ByYear)
+##creating a new tibble object 
+NewTibble&lt;- as_tibble(object1)
+
+## Only using the column name way and then filter year after 2000
+YearAfter2000_normal&lt;- NewTibble[c(&quot;Year&quot;, &quot;Beijing_Enterprise&quot;, &quot;Beijing_Output&quot;, &quot;Shanghai_Enterprise&quot;, &quot;Shanghai_Output&quot;)]
+YearAfter2000_normal &lt;- filter(YearAfter2000_normal, YearAfter2000_normal$Year &gt; 2000)
+View(YearAfter2000_normal)
+
+##Using dplyr to select column and rows with condition
+YearAfter2000_dyplr &lt;- NewTibble %&gt;%
+  select(Year, Beijing_Enterprise, Beijing_Output, Shanghai_Enterprise, Shanghai_Output) %&gt;%
+  filter(Year &gt;= 2000)
+view(YearAfter2000_dyplr)
+
+##Mutate a new ratio column 
+NewRatioColumn &lt;- YearAfter2000_dyplr %&gt;%
+  mutate(Ratio = Beijing_Output/Shanghai_Output)
+view(NewRatioColumn)</code></pre>
+</div>
+<div id="task-15" class="section level2">
+<h2>Task 15</h2>
+<pre class="r"><code>##Creating the function that takes in the required dataset, the name of two province output name
+
+myFunction&lt;- function(dataset, province1_output, province2_output){
+  province_outputs &lt;- dataset %&gt;%
+    select(province1_output, province2_output, Year)
+return(province_outputs)
+}
+
+##example using Beijing_Output and Shanghai_Output
+datasets&lt;- myFunction(NewTibble, province1_output = &quot;Beijing_Output&quot;, province2_output = &quot;Shanghai_Output&quot;)</code></pre>
 </div>
 </div>
 
